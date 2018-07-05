@@ -1,13 +1,13 @@
 ---
 - name: Install Java
-  hosts: app_server
+  hosts: tag_ansible_group_webservers
   become: yes
   become_user: root
   roles:
     - geerlingguy.java
 
 - name: Download Application from Repo
-  hosts: app_server
+  hosts: tag_ansible_group_webservers
   tasks:
     - get_url:
         force: yes
@@ -17,7 +17,7 @@
         path: "/tmp/{{ lookup('env','APP_NAME') }}.war"
 
 - name: Setup Spring Boot
-  hosts: app_server
+  hosts: tag_ansible_group_webservers
   become: yes
   become_user: root
   roles: 
